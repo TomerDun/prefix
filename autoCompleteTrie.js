@@ -2,7 +2,7 @@ export default class AutoCompleteTrie {
     constructor(value=null, endOfWord=false) {
         this.value = value;
         this.children = {};
-        this.endOfWord = false;
+        this.endOfWord = endOfWord;
     }
 
     addWord(word) {        
@@ -23,8 +23,7 @@ export default class AutoCompleteTrie {
 
         if (!(char in this.children)) {
             const newNode = new AutoCompleteTrie(char, false);
-            this.children[char] = newNode
-            
+            this.children[char] = newNode            
         }
         this.children[char].addWord(nextWord);
     }
