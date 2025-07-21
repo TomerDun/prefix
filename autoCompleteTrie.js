@@ -45,4 +45,42 @@ export default class AutoCompleteTrie {
         }
         else return false;
     }
+
+    predictWords(prefix) {
+        const startingNode = this._getPrefixEnd(prefix);
+        if (!startingNode) return []; // No words with the given prefix
+        return startingNode._getAllWords(prefix.slice(0,-1));
+    }
+
+    // Helper Methods
+    _getAllWords(prefix, allWords=[]) {
+        prefix += this.value;
+        if (this.endOfWord) {
+            allWords.push(prefix);
+        }
+        
+        for (let child of Object.values(this.children)) {
+            child._getAllWords(prefix, allWords);
+        }
+
+        return allWords;
+    }
+
+    _getPrefixEnd(prefix) {
+        if (prefix.length === 1) {
+            if (prefix in this.children) return this.children[prefix];
+            return;
+        }
+        
+        const firstChar = prefix[0];
+        const nextPrefix = prefix.slice(1);
+
+        if (firstChar in this.children) {
+            return this.children[firstChar]._getPrefixEnd(nextPrefix);
+        }
+        else {
+            return;
+        }
+
+    }
 }
