@@ -9,3 +9,9 @@ tree.addWord('trut');
 
 console.log(tree);
 
+console.log(tree.findWord('true'))
+console.log(tree.findWord('truee'))
+console.log(tree.findWord('abb'))
+console.log(tree.findWord('abba'))
+console.log(tree.findWord('abbaa'))
+
