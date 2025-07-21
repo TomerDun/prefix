@@ -6,7 +6,7 @@ export default class AutoCompleteTrie {
     }
 
     addWord(word) {
-        if (!word.length) return; // Edge case - empty string
+        if (!word) return; // Edge case - empty string
 
         const char = word[0];
 
