@@ -11,7 +11,8 @@ export function displayHelp() {
   find <word>     - Check if word exists
   complete <prefix> - Get completions
   help           - Show this message
-  exit           - Quit program`)
+  exit           - Quit program
+  `)
 }
 
 export function handleAdd(trie, word) {
@@ -27,6 +28,9 @@ export function handleFind(trie, word) {
 
 export function handleComplete(trie, word) {
     const words = trie.predictWords(word);
-    console.log(color(`Suggestions for '${word}': ${words}`, 'blue'));
+    if (!words.length) console.log((color(`No suggestions found for '${word}'`, 'blue')));
+    else console.log(color(`Suggestions for '${word}': ${words}`, 'blue'));
+    
+    
     
 }

@@ -1,4 +1,4 @@
-import { displayHelp, displayWelcome, handleAdd } from "./commandHandler.js";
+import { displayHelp, displayWelcome, handleAdd, handleComplete, handleFind } from "./commandHandler.js";
 import PromptSync from "prompt-sync";
 import { validateWord } from "./utils/validations.js";
 import { color } from "./utils/colorText.js";
@@ -10,17 +10,17 @@ const prompt = PromptSync();
 
 displayWelcome();
 
-let p;
+while (true) {
+    let p = prompt('> ');
 
-while (p !== 'exit') {
-    p = prompt('> ');
+    if (p === 'exit') break;
 
     if (p === 'help') {
         displayHelp();
         continue;
     }
 
-    let command, word = p.split(' ');
+    let [command, word] = p.split(' ');
 
     try {
         validateWord(word);
@@ -28,8 +28,10 @@ while (p !== 'exit') {
         console.error(color(err, 'red'));
         continue;
     }
-    
 
+    word = word.toLowerCase();
+    command = command.toLowerCase();
+    
     switch (command) {
         case 'add': handleAdd(trie, word);
         break;
