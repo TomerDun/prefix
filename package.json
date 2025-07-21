@@ -24,5 +24,8 @@
   "homepage": "https://github.com/TomerDun/prefix#readme",
   "devDependencies": {
     "jest": "^30.0.4"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
   }
 }
